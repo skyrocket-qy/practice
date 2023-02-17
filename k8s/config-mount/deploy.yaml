@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+  labels:
+    app: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world
+        image: vad1mo/hello-world-rest
+        ports:
+        - containerPort: 5050
+        volumeMounts:
+        - name: mtsvc
+          mountPath: /app/mtsvc.json
+          subPath: mtsvc.json
+          readOnly: true
+      volumes:
+      - name: mtsvc
+        configMap:
+          name: mtsvcconf
+          items:
+          - key: mtsvc.json
+            path: mtsvc.json
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mtsvcconf
+data:
+  mtsvc.json: |
+    {
+      "test": "hello"
+    }
+
