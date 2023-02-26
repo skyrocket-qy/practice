@@ -1,11 +1,5 @@
 package main
 
-import "fmt"
-
-func main() {
-	fmt.Println(rune(ToLower('B')))
-}
-
 func Multiple2(in int) int {
 	return in << 1
 }
