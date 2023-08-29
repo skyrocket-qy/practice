@@ -1,0 +1,6 @@
+
+
+def block_encrypt():
+    
+    
+    
