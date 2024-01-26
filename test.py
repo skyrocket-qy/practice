@@ -1,16 +1,22 @@
-import time
+class Solution:
+    def numWays(self, steps: int) -> int:
 
-n = 100000000
-old = time.time()
+        arrLen = steps // 2 + 1
+        print(arrLen)
+        dp = [0] * arrLen
+        dp[0] = 1
 
-for _ in range(n):
-    _ = 99999999 * 0.01
+        for step in range(1, steps + 1):
+            left = 0
+            print(step)
+            
+            for i in range( min(arrLen, steps - step + 1) ):
+                tmp = dp[i]
+                dp[i] = left + dp[i] + (dp[i + 1] if i + 1 < arrLen else 0)
+                left = tmp
+                print(dp)
 
-print(time.time()-old)
-
-old = time.time()
-
-for _ in range(n):
-    _ = 99999999 / 100
-
-print(time.time()-old)
+        return dp[0] % 1000_000_007
+    
+so = Solution()
+so.numWays(4)
