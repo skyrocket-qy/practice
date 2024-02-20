@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "TokenCounterImpl.h"
 
 volatile sig_atomic_t ctrlCPressed = 0;
 
@@ -12,12 +13,12 @@ void my_handler(int s){
 
 int main(int argc, char** argv){
     struct sigaction sigIntHandler;
-
     sigIntHandler.sa_handler = my_handler;
     sigemptyset(&sigIntHandler.sa_mask);
     sigIntHandler.sa_flags = 0;
-
     sigaction(SIGINT, &sigIntHandler, NULL);
+
+    TokenCounterImpl* counter = new TokenCounterImpl();
 
     char input[256];
     while (1) {
@@ -32,7 +33,13 @@ int main(int argc, char** argv){
             printf("Ctrl+C pressed. Program will exit if 'exit' is entered.\n");
             ctrlCPressed = 0;
         } else if (strlen(input) > 0) {
-            printf("Unknown command: %s\n", input);
+            if (strncmp(input, "ingest", 6) == 0){
+                printf("ingest\n");
+            }else if (strncmp(input, "appearance", 10) == 0){
+                printf("appearance\n");
+            }else{
+                printf("Unknown command: %s\n", input);
+            }
         }
     }
 
