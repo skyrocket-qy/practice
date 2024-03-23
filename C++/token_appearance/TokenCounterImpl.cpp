@@ -2,49 +2,65 @@
 #include <unordered_map>
 #include <vector>
 #include "node.h"
+#include <iostream>
+
 
 TokenCounterImpl::TokenCounterImpl() : Total(0), TokenNodeMap() {}
 
 void TokenCounterImpl::Ingest(std::string input) {
-    Total++;
-    std::vector<std::string> tokens;
+    printf("%s\n", input.c_str());
+    input = input.substr(2, input.length()-4);
+    printf("%s\n", input.c_str());
+    std::string delimiter = ":";
     size_t pos = 0;
     std::string token;
-    while ((pos = input.find(":")) != std::string::npos) {
+    while ((pos = input.find(delimiter)) != std::string::npos) {
         token = input.substr(0, pos);
-        tokens.push_back(token);
-        input.erase(0, pos + 1);
+        std::cout << token << std::endl;
+        input.erase(0, pos + delimiter.length());
     }
-    tokens.push_back(input);
+    std::cout << input << std::endl;
 
-    Node* curNode = nullptr;
-    for (size_t i = 0; i < tokens.size(); ++i) {
-        std::string token = tokens[i];
-        Node* node = nullptr;
+    
+    // Total++;
+    // std::vector<std::string> tokens;
+    // size_t pos = 0;
+    // std::string token;
+    // while ((pos = input.find(":")) != std::string::npos) {
+    //     token = input.substr(0, pos);
+    //     tokens.push_back(token);
+    //     input.erase(0, pos + 1);
+    // }
+    // tokens.push_back(input);
 
-        // get or create node
-        auto it = TokenNodeMap.find(token);
-        if (it == TokenNodeMap.end()) {
-            node = new Node(token);
-            TokenNodeMap[token] = node;
-        } else {
-            node = it->second;
-        }
+    // Node* curNode = nullptr;
+    // for (size_t i = 0; i < tokens.size(); ++i) {
+    //     std::string token = tokens[i];
+    //     Node* node = nullptr;
 
-        // add children
-        if (curNode != nullptr) {
-            curNode->Children[token] = node;
-        }
-        curNode = node;
-        curNode->Count++;
+    //     // get or create node
+    //     auto it = TokenNodeMap.find(token);
+    //     if (it == TokenNodeMap.end()) {
+    //         node = new Node(token);
+    //         TokenNodeMap[token] = node;
+    //     } else {
+    //         node = it->second;
+    //     }
 
-        if (i == 0) {
-            curNode->Start++;
-        }
-        if (i == tokens.size() - 1) {
-            curNode->End++;
-        }
-    }
+    //     // add children
+    //     if (curNode != nullptr) {
+    //         curNode->Children[token] = node;
+    //     }
+    //     curNode = node;
+    //     curNode->Count++;
+
+    //     if (i == 0) {
+    //         curNode->Start++;
+    //     }
+    //     if (i == tokens.size() - 1) {
+    //         curNode->End++;
+    //     }
+    // }
 }
 
 float TokenCounterImpl::Appearance(std::string input) {

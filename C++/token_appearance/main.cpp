@@ -4,11 +4,15 @@
 #include <string.h>
 #include "TokenCounterImpl.h"
 
-volatile sig_atomic_t ctrlCPressed = 0;
 
 void my_handler(int s){
     printf("\nCaught signal %d\n", s);
-    ctrlCPressed = 1;
+}
+
+std::string getInputString(char* input) {
+    size_t length = strcspn(input, "\n");
+    input[length] = '\0';
+    return std::string(input);
 }
 
 int main(int argc, char** argv){
@@ -29,19 +33,23 @@ int main(int argc, char** argv){
 
         input[strcspn(input, "\n")] = '\0';
 
-        if (ctrlCPressed) {
-            printf("Ctrl+C pressed. Program will exit if 'exit' is entered.\n");
-            ctrlCPressed = 0;
-        } else if (strlen(input) > 0) {
+        if (strlen(input) > 0) {
             if (strncmp(input, "ingest", 6) == 0){
-                printf("ingest\n");
+                const std::string str = getInputString(input);
+                printf("Actual input: %s\n", str.c_str());
+                counter->Ingest(str.substr(6));
             }else if (strncmp(input, "appearance", 10) == 0){
-                printf("appearance\n");
+                const std::string str = getInputString(input);
+                printf("Actual input: %s\n", str.c_str());
+                counter->Appearance(str.substr(10));
             }else{
                 printf("Unknown command: %s\n", input);
             }
         }
     }
 
+    printf("clean up the resource\n");
+    delete counter;
     return 0;
 }
+
