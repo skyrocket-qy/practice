@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.embeddedhtml": "html",
         "__bit_reference": "cpp",
         "__config": "cpp",
         "__debug": "cpp",
@@ -66,6 +67,8 @@
         "random": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
-        "numbers": "cpp"
-    }
+        "numbers": "cpp",
+        "stdlib.h": "c"
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }
