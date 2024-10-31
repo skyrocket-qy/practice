@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "server/api";
+
+service Main {
+  rpc ListAccount(ListAccountReq) returns (ListAccountResp);
+}
+
+message ListAccountReq {}
+
+message ListAccountResp {
+  repeated Account List = 1;
+  string Total = 2;
+}
+
+message Account {
+  string UserName = 1;
+  string DisplayName = 2;
+  int32 State = 3;
+}

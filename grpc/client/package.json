@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@bufbuild/connect": "^0.13.0",
+    "@connectrpc/connect": "^1.6.1",
+    "@connectrpc/connect-web": "^1.6.1"
+  }
+}
