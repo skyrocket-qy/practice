@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",           
+    "build": "vite build",
+    "serve": "vite preview"  
+  },
+  "type": "module",
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.10.0",
+    "@connectrpc/connect-web": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.5",
+    "vite": "^5.4.10"
+  }
+}
