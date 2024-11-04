@@ -1,0 +1,3 @@
+/home/qy/skyrocketOoO/cmake-example/build/CMakeFiles/cmake-example.dir
+/home/qy/skyrocketOoO/cmake-example/build/CMakeFiles/edit_cache.dir
+/home/qy/skyrocketOoO/cmake-example/build/CMakeFiles/rebuild_cache.dir
