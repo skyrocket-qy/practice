@@ -1,6 +1,10 @@
 package main
 
 import (
+	"time"
+
+	"test/query"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gen"
 	"gorm.io/gorm"
@@ -47,4 +51,8 @@ func main() {
 	)
 	// Generate the code
 	g.Execute()
+}
+
+func test() {
+	query.Account.Where(query.Account.CreatedAt.Eq(time.Now())).Find()
 }

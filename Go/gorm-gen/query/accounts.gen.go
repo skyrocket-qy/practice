@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"practice/Go/model"
+	"test/model"
 )
 
 func newAccount(db *gorm.DB, opts ...gen.DOOption) account {
